@@ -1,0 +1,60 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.bnb.mapper.RoomMapper">
+
+    <select id="get_all_rooms" resultMap="get_all_rooms_info">
+        SELECT * FROM room RO
+        LEFT OUTER JOIN room_images IM
+        ON RO.`no` = IM.room_no
+        LEFT OUTER JOIN rating RT
+        ON RO.`no` = RT.room_no
+        WHERE RO.`state` = 'POST'
+        <if test="min != -1">
+            <![CDATA[
+                AND RO.`price` >= ${min}
+            ]]>
+        </if>
+        <if test="max != -1">
+            <![CDATA[
+                AND RO.`price` <= ${max      }
+            ]]>
+        </if>
+
+        <choose>
+            <when test="sort == 'lowPrice'">
+                ORDER BY `price` ASC
+            </when>
+            <when test="sort == 'highPrice'">
+                ORDER BY `price` DESC
+            </when>
+        </choose>
+    </select>
+
+    <select id="find_room_by_roomNo" parameterType="int"  resultMap="get_all_rooms_info">
+        SELECT * FROM room RO
+            LEFT OUTER JOIN room_images IM
+            ON RO.`no` = IM.room_no
+            LEFT OUTER JOIN rating RT
+            ON RO.`no` = RT.room_no
+            WHERE RO.`state` = 'POST'
+        AND RO.no = #{roomNo}
+    </select>
+
+
+    <resultMap id="get_all_rooms_info" type="RoomDTO">
+        <id column="no" property="roomNo" />
+        <association property="roomVO" javaType="RoomVO">
+            <result column="user_id" property="userId" />
+            <result column="price" property="price" />
+            <result column="title" property="title" />
+            <result column="text" property="text" />
+        </association>
+        <collection property="ratingVO" ofType="RatingVO" javaType="list">
+            <result column="score" property="score" />
+        </collection>
+        <collection property="roomImagesVO" ofType="RoomImagesVO" javaType="list">
+            <result column="image" property="roomImage" />
+        </collection>
+    </resultMap>
+</mapper>

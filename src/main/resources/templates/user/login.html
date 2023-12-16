@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../static/css/user/login.css" th:href="@{/css/user/login.css}">
+</head>
+<body>
+<main>
+    <div class="main-logo-img">
+        <a href="/">
+            <img src="../../static/image/layout/header/logo.svg" th:src="@{/image/layout/header/logo.webp}" alt="로고">
+        </a>
+    </div>
+
+    <div>
+        <form th:action="@{/user/login}" method="post" class="login-form">
+<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+            <div class="login-id">
+                <label for="user-id"><i class="fa-solid fa-user"></i></label>
+                <input type="text" id="user-id" name="username" placeholder="아이디">
+            </div>
+            <div class="login-pw">
+                <label for="user-pw"><i class="fa-solid fa-lock"></i></label>
+                <input type="text" id="user-pw" name="password" placeholder="비밀번호">
+            </div>
+            <div class="login-remember">
+                <label><input type="checkbox">아이디 저장</label>
+                <label><input type="checkbox" name="remember-me">자동 로그인</label>
+            </div>
+            <button>로그인</button>
+        </form>
+
+        <div class="user-info">
+            <a href="/user/info">아이디 / 비밀번호 찾기</a>
+            <span>|</span>
+            <a th:href="@{/user/join}">회원가입</a>
+        </div>
+        <div class="sns-login">
+            <a href="/oauth2/authorization/kakao">
+                <img src="../../static/image/user/kakao_login_medium_wide.png" th:src="@{/image/user/kakao_login_medium_wide.png}" alt="kakao"/>
+            </a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

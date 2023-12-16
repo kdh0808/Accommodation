@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>KOREA BNB</title>
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" href="../../static/css/rooms/main.css" th:href="@{/css/rooms/main.css}">
+    <script src="../../static/js/rooms/main.js" th:src="@{/js/rooms/main.js}" defer></script>
+</head>
+<body>
+<header th:replace="layout/header :: header"></header>
+<main>
+    <section class="room-title-section">
+        <h1 th:text="${roomDTO.roomVO.title}">경주 다인 풀빌라 펜션</h1>
+        <div>
+            <div class="room-info-star-div">
+                <i class="fa-solid fa-star"></i><span>3.5</span>
+            </div>
+            <a href="#" class="room-info-heart-a">
+                <i class="fa-regular fa-heart"></i><span>저장</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="room-img-section">
+        <th:block th:each="roomImageVO: ${roomDTO.roomImagesVO}">
+            <img th:src="@{'/rooms/image/' + ${roomImageVO.roomImage}}" alt="사진"  src=""/>
+        </th:block>
+    </section>
+
+    <div class="room-info-layout">
+        <!--    호스트 정보와 방 정보        -->
+        <div>
+            <section class="room-host-info-section">
+                <button>
+                    <span><img th:src="@{/image/doge.svg}" src="../../static/image/doge.svg" alt="host-icon" /></span>
+                    <span th:text="${roomDTO.roomVO.userId} + 님">KOREAIT님</span>
+                </button>
+            </section>
+
+            <section class="room-spec-section">
+                <div class="room-spec">
+                    <i class="fa-solid fa-wifi"></i>
+                    <div class="room-spec-details">
+                        <span>무제한 와이파이</span>
+                        <span>와이파이가 제공되어 업무를 보기에 적합한 방입니다.</span>
+                    </div>
+                </div>
+                <div class="room-spec">
+                    <i class="fa-solid fa-person-swimming"></i>
+                    <div class="room-spec-details">
+                        <span>마음껏 물놀이를 즐기세요</span>
+                        <span>해당 지역에서 수영장을 갖춘 몇 안 되는 숙소 중 하나입니다.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="room-info-text" th:utext="${roomDTO.roomVO.text}"></section>
+
+        </div>
+        <!--  예약 정보   -->
+        <form class="room-reserve-section" name="reservation-form">
+            <input type="hidden" th:name="roomNo" th:value="${roomDTO.roomNo}" />
+            <input type="hidden" th:name="price" th:value="${roomDTO.roomVO.price}" />
+            <div>
+                <div class="room-price-origin">
+                    <span th:text="${#numbers.formatCurrency(roomDTO.roomVO.price)}">65,000</span>
+                    <span>/ 박</span>
+                </div>
+
+                <div class="room-check-in-out">
+                    <label>체크인<input type="date" id="reserve-start-date" name="startDate"></label> <br/>
+                    <label>체크아웃<input type="date" id="reserve-end-date" name="endDate"></label>
+                </div>
+
+                <div class="room-guest">
+                    <label for="person-count">인원</label>
+                    <select id="person-count" name="personCount">
+                        <option value="1">게스트 1명</option>
+                        <option value="2">게스트 2명</option>
+                        <option value="3">게스트 3명</option>
+                        <option value="4">게스트 4명</option>
+                        <option value="5">게스트 5명</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="room-price-detail-info">
+                <div>
+                    <span id="room-day-price">65,000</span><span id="room-reserve-day"> x 5박</span>
+                </div>
+                <div>
+                    <span>&#8361;</span><span id="room-reserve-total-price">3,250,000</span>
+                </div>
+            </div>
+
+            <div class="room-price-final">
+                <span>총 합계</span>
+                <div>
+                    <span>&#8361;</span><span id="room-reserve-final-price">3,250,000</span>
+                </div>
+            </div>
+
+            <button sec:authorize="isAuthenticated()">예약하기</button>
+            <a th:href="@{/user/login}" sec:authorize="!isAuthenticated()">로그인 하고 예약하기</a>
+        </form>
+
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

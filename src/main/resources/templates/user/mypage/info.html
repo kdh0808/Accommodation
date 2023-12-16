@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>내정보</title>
+</head>
+<body>
+<main>
+    <form action="/user/mypage/info" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <div>아이디: <span th:name="id" th:text="${#authentication.principal.userVO.id}"></span></div>
+
+        <div>비밀번호: <input th:name="pw"></div>
+
+        <div>이메일: <input th:name="email" th:value="${#authentication.principal.userVO.email}"></div>
+
+        <div>전화번호: <input th:name="tel" th:value="${#authentication.principal.userVO.tel}"></div>
+
+        <div>닉네임: <input th:name="nickName" th:value="${#authentication.principal.userVO.nickName}" /></div>
+
+        <div>생년월일: <input th:name="birth" th:value="${#authentication.principal.userVO.birth}" /></div>
+        <input type="submit" value="수정">
+        <input type="button" value="취소">
+    </form>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+main {
+    margin: 0 auto;
+    width: 1600px;
+    text-align: center;
+
+}
+
+.main-logo-img{
+    margin: 0 auto;
+    width: 100px;
+    padding: 65px 0;
+}
+
+.main-logo-img img{
+    width: 100%;
+}

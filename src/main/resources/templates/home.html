@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>KOREA BNB</title>
+    <script src="https://kit.fontawesome.com/93e8a36caf.js"  crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+    <link rel="stylesheet" href="../../static/css/layout/header.css" th:href="@{/css/layout/header.css}">
+    <script src="../static/js/home.js" th:src="@{/js/home.js}" defer></script>
+</head>
+<body>
+<header th:replace="layout/header :: header"></header>
+<main>
+    <section class="search">
+        <div class="filter-price">
+            <label for="min-price">최소</label>
+            <input type="text" id="min-price">
+            <span>원</span>
+            <span>~</span>
+            <label for="max-price">최대</label>
+            <input type="text" id="max-price">
+            <span>원</span>
+        </div>
+
+        <div class="sort-option">
+            <label>
+                <select id="sort-filter-select">
+                    <option value="all" selected>전체</option>
+                    <option value="lowPrice">저가격순</option>
+                    <option value="highPrice">고가격순</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="filter-confirm-button">
+            <label><input type="button" value="확인"></label>
+        </div>
+    </section>
+
+    <section class="rooms">
+        <div class="room">
+            <input type="checkbox" name="heart" id="heart" onchange="change_heart()">
+            <label for="heart"><i class="fa-regular fa-heart"></i></label>
+            <div class="room-img">
+                <img src="https://a0.muscache.com/im/pictures/miso/Hosting-13903824/original/82d996fb-d7c4-46a8-a713-febd281cd69f.jpeg?im_w=720" alt="방모습">
+            </div>
+
+            <div>
+                <span class="title">아주 좋은 방^-^</span>
+            </div>
+
+            <div class="room-info">
+                <div class="room-price">
+                    <span>&#8361;</span><span>81,938</span><span> /박</span>
+                </div>
+                <div class="star">
+                    <i class="fa-solid fa-star"></i><span>3.5</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+</body>
+</html>

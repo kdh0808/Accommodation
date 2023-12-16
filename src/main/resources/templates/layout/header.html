@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <link rel="stylesheet" href="../../static/css/layout/header.css" th:href="@{/css/layout/header.css}">
+</head>
+<body>z
+    <header th:fragment="header">
+        <div id="con">
+
+            <a href="/"><img src="../../static/image/layout/header/logo.webp" th:src="@{/image/layout/header/logo.webp}" alt="logo"></a>
+            <nav>
+                <a sec:authorize="authenticated and hasRole('SELLER')" th:href="@{/board}"><img src="../../static/image/layout/header/pen-to-square-solid.svg" th:src="@{/image/layout/header/pen-to-square-solid.svg}" alt=""></a>
+                <a href=""><img src="../../static/image/layout/header/globe-solid.svg" th:src="@{/image/layout/header/globe-solid.svg}" alt="global"></a>
+                <a sec:authorize="not authenticated" href="/user/login"><img src="../../static/image/layout/header/user-regular.svg" th:src="@{/image/layout/header/user-regular.svg}" alt="user"></a>
+                <a sec:authorize="authenticated" href="/user/mypage"><img src="../../static/image/layout/header/user-regular.svg" th:src="@{/image/layout/header/user-regular.svg}" alt="user"></a>
+                <a sec:authorize="authenticated" href="/user/logout"><img src="../../static/image/layout/header/right-from-bracket-solid.svg" th:src="@{/image/layout/header/right-from-bracket-solid.svg}" alt="user"></a>
+
+            </nav>
+        </div>
+    </header>
+</body>
+</html>

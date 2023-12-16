@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <title>예약정보</title>
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <script src="../../../static/js/user/mypage/reservation.js" th:src="@{/js/user/mypage/reservation.js}" defer></script>
+</head>
+<style>
+    .REQUEST{
+        background-color: rgba(100,100,100,0.2);
+    }
+    .ACCEPTED{
+        background-color: darkseagreen;
+    }
+    .CANCELED{
+        background-color: #428bca;
+    }
+</style>
+<body>
+    <header th:replace="layout/header :: header"></header>
+    <h1 sec:authorize="hasRole('USER')">예약 정보</h1>
+    <h1 sec:authorize="hasRole('SELLER')">예약 요청</h1>
+    <th:block th:each="reservationDTO :${reservationDTOS}">
+        <div style="border: 1px solid black; margin: 10px 0" th:class="${reservationDTO.getReservationVO().getState()}">
+            <div>
+                <a th:href="@{|/rooms/${reservationDTO.ReservationVO.roomNo}|}">
+                    <span th:text="${reservationDTO.roomVO.title}"></span> <br/>
+                    <img th:src="@{'/rooms/image/' + ${reservationDTO.roomImagesVOS[0].roomImage}}" width="200" alt="메인이미지">
+                </a>
+            </div>
+
+            <th:block sec:authorize="hasRole('SELLER')">
+                <b>예약자:</b><span>[[${reservationDTO.reservationVO.userId}]]</span> <br>
+            </th:block>
+            <b>예약시작일:</b><span>[[${reservationDTO.reservationVO.startDate}]]</span> <br>
+            <b>예약종료일:</b><span>[[${reservationDTO.reservationVO.endDate}]]</span> <br>
+            <b>총:</b><span> [[${reservationDTO.reservationVO.days}]]일</span> <br>
+            <b>예약인원수:</b><span> [[${reservationDTO.reservationVO.personCount}]] 명</span> <br>
+            <b>1박당 가격:</b><span> [[${reservationDTO.reservationVO.price}]] 원</span> <br>
+            <b>총가격:</b><span>총 [[${reservationDTO.reservationVO.totalPrice}]] 원</span> <br>
+            <b>상태:</b><span>[[${reservationDTO.reservationVO.state}]]</span> <br>
+
+            <th:block sec:authorize="hasRole('USER')" >
+                <b>평점:</b> <input type="number" min="0" max="10" name="rate" id="rate">
+                <input type="button" value="평점 등록" th:onclick="|registered_rate(${reservationDTO.no})|">
+            </th:block>
+
+            <th:block sec:authorize="hasRole('SELLER')" >
+                <input type="button" value="확정" th:onclick="|change_reservation_state(${reservationDTO.no}, 'ACCEPTED')|">
+                <input type="button" value="취소" th:onclick="|change_reservation_state(${reservationDTO.no}, 'CANCELED')|">
+            </th:block>
+
+        </div>
+    </th:block>
+</body>
+</html>
+
+

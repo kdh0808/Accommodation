@@ -1,0 +1,129 @@
+.room-img-section::-webkit-scrollbar {
+    width: 5px;
+}
+
+.room-img-section::-webkit-scrollbar-thumb {
+    height: 5px;
+    background: rgba(75, 137, 225, 0.71);
+    border-radius: 10px;
+}
+
+.room-img-section::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+
+main{
+    margin: 0 auto;
+    width: 1400px;
+}
+
+section{
+    margin: 30px 0;
+}
+
+.room-title-section{
+    display: flex;
+    justify-content: space-between;
+}
+
+.room-title-section > div{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    font-size: 115%;
+}
+
+.room-title-section > div > div {
+    margin-right: 30px;
+}
+
+.room-title-section > div > div,
+.room-title-section > div > a{
+    width: 70px;
+    height: 55px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.room-title-section > div > a:hover{
+    background-color: #f7f7f7;
+}
+
+.room-img-section {
+    width: 100%;
+    height: 500px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.room-img-section img {
+    border-radius: 15px;
+    height: 500px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.room-info-layout{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 200px;
+}
+
+.room-info-layout > div {
+    position: relative;
+    width: 1000px;
+}
+
+.room-spec-section{
+    border-top: 1px solid #D3D3D3;
+}
+
+.room-spec{
+    height: 45px;
+    margin: 20px 0;
+}
+.room-spec-section i {
+    width: 40px;
+    font-size: 2rem;
+    line-height: 45px;
+    padding-right: 30px;
+}
+
+.room-spec-details {
+    display: inline-block;
+    height: 45px;
+}
+
+.room-spec-details > span {
+    display: block;
+}
+
+.room-spec-details > span:nth-child(1){
+    font-weight: bold;
+}
+
+.room-info-text{
+    border-top: 1px solid #D3D3D3;
+    padding: 50px 0;
+}
+
+.room-info-text > p > span{
+    font-size: 20px !important;
+    line-height: 30px !important;
+}
+
+.room-reserve-section{
+    width: 350px;
+    border: 1px solid #000;
+    box-shadow: 3px 3px 3px 3px #ccc;
+    border-radius: 15px;
+}
+
+.room-reserve-section > div{
+    margin: 30px auto;
+    width: 250px;
+}
+

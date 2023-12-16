@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="../../static/css/layout/header.css" th:href="@{/css/layout/header.css}">
+</head>
+<body>
+    <header th:replace="layout/header :: header"></header>
+    <h1>유저의 마이페이지 창입니다^-^</h1>
+    <a href="/user/mypage/info">개인정보확인</a>
+    <a sec:authorize="hasRole('USER') or hasAuthority('USER')" href="/user/mypage/reservation">예약정보확인</a>
+    <a sec:authorize="hasRole('SELLER')" href="/user/mypage/reservation">예약요청확인</a>
+    <a sec:authorize="hasRole('SELLER')" href="/user/mypage/sale">현재판매목록</a>
+    <a href="/user/mypage/heart">좋아요목록</a>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="../../static/css/user/join.css" th:href="@{/css/user/join.css}">
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <script src="../../static/js/user/join.js" th:src="@{/js/user/join.js}" defer></script>
+</head>
+<body>
+<main>
+    <h1>회원가입</h1>
+
+    <form th:action="@{/user/join}" method="post">
+        <section>
+            <div class="join-classify">
+                <label><input type="hidden" name="social" value="NORMAL"></label>
+                <label><input type="radio" name="role" value="USER" checked>일반 회원</label>
+                <label><input type="radio" name="role" value="SELLER">판매자</label>
+            </div>
+        </section>
+        <section class="join-section join-first-section">
+            <div class="join-info">
+                <label><input type="text" name="id" required placeholder="ID를 작성하세요 (띄워쓰기 없이 영/숫자, 최대 15자)"></label>
+                <span>필수 정보입니다.</span>
+            </div>
+            <div>
+                <input type="button" value="중복체크">
+            </div>
+            <div class="join-check-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </section>
+
+        <section class="join-section">
+            <div class="join-info">
+                <label><input type="text" name="pw" required placeholder="비밀번호 (8-15자의 영문자, 숫자, 특수문자 조합)"></label>
+                <span>필수 정보입니다.</span>
+            </div>
+            <div class="join-check-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </section>
+
+        <section class="join-section">
+            <div class="join-info">
+                <label><input type="text" required placeholder="비밀번호 재작성"></label>
+                <span>필수 정보입니다.</span>
+            </div>
+            <div class="join-check-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </section>
+
+        <section class="join-section">
+            <div class="join-info">
+                <label><input type="text" name="email" required placeholder="이메일"></label>
+                <span>필수 정보입니다.</span>
+            </div>
+            <div class="join-check-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </section>
+
+        <section class="join-section">
+            <div class="join-info">
+
+                <div class="join-tel">
+
+                    <div class="join-tel-info">
+                        <input type="hidden" name="tel" value="01012345678">
+                        <label class="tel-front">
+                            <select>
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="019">019</option>
+                                <option value="018">018</option>
+                                <option value="016">016</option>
+                            </select>
+                        </label>
+                        <label class="tel-mid"><input type="number" maxlength="4" max="9999" required></label>
+                        <span>-</span>
+                        <label class="tel-back"><input type="number" maxlength="4" max="9999" required></label>
+                    </div>
+
+                    <div class="join-tel-cert">
+                        <label class="join-tel-cert-verify-get"><input type="button" value="인증번호받기"></label>
+                        <label class="join-tel-cert-verify-input"><input type="number" maxlength="4" max="9999" minlength="4" placeholder="인증번호입력"></label>
+                        <label class="join-tel-cert-verify-confirm"><input type="button" value="확인"></label>
+                        <input type="hidden" name="verified">
+                    </div>
+                </div>
+
+                <span>필수 정보입니다.</span>
+            </div>
+
+            <div class="join-check-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </section>
+
+        <section class="join-section">
+            <div class="join-info">
+                <label><input type="text" name="nickName" placeholder="닉네임"></label>
+                <span>닉네임(선택정보)</span>
+            </div>
+        </section>
+
+        <section class="join-section join-last-section" >
+            <div class="join-info">
+                <label><input type="date" name="birth"></label>
+                <span>생년월일(선택정보)</span>
+            </div>
+        </section>
+
+        <section class="join-buttons">
+            <input type="button" value="돌아가기">
+            <input type="button" value="확인">
+        </section>
+    </form>
+
+</main>
+</body>
+</html>

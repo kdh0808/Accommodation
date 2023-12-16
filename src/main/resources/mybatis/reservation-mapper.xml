@@ -1,0 +1,84 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.bnb.mapper.ReservationMapper">
+    <!-- 방 예약 가능 여부 체크  -->
+    <select id="reservation_room_possible_check" resultType="ReservationVO">
+        SELECT * FROM `reservation`
+        WHERE `room_no` = #{roomNo} AND
+        (
+        (`start_date` BETWEEN #{startDate} AND #{startDate})
+        OR
+        (`end_date` BETWEEN #{endDate} AND #{endDate})
+        )
+        LIMIT 1
+    </select>
+
+    <!-- 방 예약    -->
+    <insert id="reservation_room" parameterType="ReservationVO">
+        INSERT INTO `reservation` VALUES
+        (NULL, #{userId}, #{roomNo}, #{startDate}, #{endDate}, #{days}, #{personCount}, 0, #{price}, #{totalPrice}, DEFAULT)
+    </insert>
+
+    <!-- 방 예약 정보 조회 (일반 유저)   -->
+    <select id="get_reserve_info_by_user" parameterType="UserVO" resultMap="get_reserve_info_by_user_map">
+        SELECT RE.*, RO.*, RE.state AS 'RES', RO.state AS 'ROS', RI.image
+        FROM reservation RE
+        INNER JOIN room RO
+        ON RE.`room_no` = RO.`no`
+        INNER JOIN room_images RI
+        ON RO.`no` = RI.`room_no`
+        WHERE RE.`user_id` = #{id};
+    </select>
+
+    <!-- 방 예약 정보 조회 (판매 유저)   -->
+    <select id="get_reserve_request_info_of_user" parameterType="UserVO" resultMap="get_reserve_info_by_user_map">
+        SELECT RE.*, RO.*, RE.state AS 'RES', RO.state AS 'ROS', RI.image
+        FROM room RO
+        INNER JOIN reservation RE
+        ON RE.`room_no` = RO.`no`
+        INNER JOIN room_images RI
+        ON RO.`no` = RI.`room_no`
+        WHERE RO.`user_id` = #{id};
+    </select>
+
+    <select id="get_sale_info_by_user" parameterType="UserVO" resultMap="get_reserve_info_by_user_map">
+        SELECT RE.*, RO.*, RE.state AS 'RES', RO.state AS 'ROS', RI.image
+        FROM room RO
+        INNER JOIN room_images RI
+        ON RO.`no` = RI.`room_no`
+        WHERE RO.`user_id` = #{id};
+    </select>
+
+    <resultMap id="get_reserve_info_by_user_map" type="ReservationDTO">
+        <id property="no" column="no" />
+
+        <association property="reservationVO" javaType="ReservationVO">
+            <result property="roomNo" column="room_no" />
+            <result property="userId" column="user_id" />
+            <result property="startDate" column="start_date" />
+            <result property="endDate" column="end_date" />
+            <result property="days" column="days" />
+            <result property="personCount" column="person_count" />
+            <result property="price" column="price" />
+            <result property="totalPrice" column="totalPrice" />
+            <result property="state" column="RES" />
+        </association>
+
+        <association property="roomVO" javaType="RoomVO">
+            <result property="title" column="title" />
+            <result property="price" column="price" />
+            <result property="text" column="text" />
+            <result property="state" column="ROS" />
+        </association>
+
+        <collection property="roomImagesVOS" javaType="list" ofType="RoomImagesVO">
+            <result property="roomImage" column="image" />
+        </collection>
+    </resultMap>
+
+    <update id="update_room_state">
+        UPDATE `reservation` SET `state` = #{state}
+        WHERE #{no} = no;
+    </update>
+</mapper>

@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.bnb.mapper.UserMapper">
+    <select id="get_user_by_id" parameterType="String">
+        SELECT * FROM `user` WHERE `id` = #{id}
+    </select>
+    <select id="get_user_by_email" parameterType="String" >
+        SELECT * FROM `user` WHERE `email` = #{id}
+    </select>
+    <insert id="join_user" parameterType="UserVO">
+        INSERT INTO `user` VALUES (#{id}, #{pw}, #{email}, #{tel}, #{nickName}, #{birth}, #{role}, #{social})
+    </insert>
+
+    <update id="update_user" parameterType="UserVO">
+        UPDATE `user` SET
+        `pw` = #{pw},
+        `email` = #{email},
+        `tel` = #{tel},
+        `email` = #{email},
+        `nickName` = #{nickName},
+        `birth` = #{birth}
+        WHERE #{id} = id
+    </update>
+
+</mapper>

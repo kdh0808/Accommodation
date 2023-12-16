@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>아이디찾기 템블릿</title>
+</head>
+<body>
+    <b th:text="#{replayMessage}"></b>
+    <b th:text="#{welcomeMessage}"> </b> <br/>
+    <p>
+        ID : <b>[[${userId}]]</b>입니다.
+    </p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="defaultFetchSize" value="100"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <!--  유저 관련  -->
+        <typeAlias alias="UserVO" type="com.koreait.bnb.domains.vo.UserVO" />
+
+        <!--  게시판 관련   -->
+        <typeAlias alias="BoardVO" type="com.koreait.bnb.domains.vo.BoardVO" />
+
+        <!-- 평점 관련       -->
+        <typeAlias alias="RatingVO" type="com.koreait.bnb.domains.vo.RatingVO" />
+
+        <!-- 방 관련    -->
+        <typeAlias alias="RoomImagesVO" type="com.koreait.bnb.domains.vo.RoomImagesVO" />
+        <typeAlias alias="RoomVO" type="com.koreait.bnb.domains.vo.RoomVO" />
+        <typeAlias alias="RoomDTO" type="com.koreait.bnb.domains.dto.RoomDTO" />
+
+        <!-- 예약 관련       -->
+        <typeAlias alias="ReservationVO" type="com.koreait.bnb.domains.vo.ReservationVO" />
+        <typeAlias alias="ReservationDTO" type="com.koreait.bnb.domains.dto.ReservationDTO" />
+
+
+    </typeAliases>
+</configuration>
+
+
+
+
+
+
+
